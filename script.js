@@ -88,28 +88,32 @@ function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
-
 function displayImage(files) {
     colorBuckets = [];
     while(output.firstChild && output.removeChild(output.firstChild));
     let img = document.createElement("img");
     img.src = URL.createObjectURL(files[0]);
+    img.classList.add("image")
     output.appendChild(img);
     img.onload = function() {
         initialSplit(img, 4);
         let averages = getAverages();
+        let buckets = document.createElement("div");
+        buckets.classList.add("buckets")
         for(let i = 0; i < 16; i++) {
-            let div = document.createElement("div");
-            div.classList.add("bucket");
+            let bucket = document.createElement("div");
+            bucket.classList.add("bucket");
             console.log(rgbToHex(averages[i][0], averages[i][1], averages[i][2]));
-            div.style.backgroundColor = rgbToHex(averages[i][0], averages[i][1], averages[i][2]);
-            output.appendChild(div);
+            bucket.style.backgroundColor = rgbToHex(averages[i][0], averages[i][1], averages[i][2]);
+            buckets.appendChild(bucket);
         }
+        output.appendChild(buckets);
     }
 }
 
 function dragOverHandler(event) {
     event.preventDefault();
+    
 }
 
 function dropHandler(event) {

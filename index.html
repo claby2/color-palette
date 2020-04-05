@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Color Palette</title>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet"> 
     <link href = "style.css" rel = "stylesheet">
 </head>
 <body>
 
+    <content>
+        <div id = "contentHolder">
+            <h1>Color Palette from Image</h1>
+            <p>Drag and drop an image below to generate a palette of 16 colors!</p>
+            <a id = "source-link" href = "https://github.com/claby2/color-average" target = "_blank" rel="noreferrer">source code</a>
+            <div id = "drop" ondrop = "dropHandler(event);" ondragover = "dragOverHandler(event);" multiple>
+                <p>DRAG AN IMAGE HERE</p>
+            </div>
+        
+            <canvas id = "canvas"></canvas>
+        
+            <div id = "output"></div>
+        </div>
 
-    <div id = "drop" ondrop = "dropHandler(event);" ondragover = "dragOverHandler(event);" multiple>
-        <p>drag here</p>
-    </div>
-
-    <canvas id = "canvas"></canvas>
-
-    <div id = "output"></div>
+    </content>
 
 
     <script src = "script.js"></script>
