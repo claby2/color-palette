@@ -1,0 +1,14 @@
+canvas {
+    display: none;
+}
+
+#drop {
+    background-color: #212121;
+    color: #FAFAFA;
+    height: 200px;
+}
+
+.bucket {
+    height: 20px;
+    width: 20px;
+}
