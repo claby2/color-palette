@@ -95,7 +95,7 @@ h1 {
 .image {
     border-radius: 10px 10px 0 0;
     margin: 0 0 10px 0;
-    max-width: 100%;
+    width: 100%;
 }
 
 iframe {
@@ -105,5 +105,10 @@ iframe {
 @media (max-width: 1000px) {
     #contentHolder {
         width: 80vw;
+    }
+
+    .image {
+        width: auto;
+        max-width: 100%;
     }
 }

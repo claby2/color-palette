@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color Palette</title>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet"> 
     <link href = "style.css" rel = "stylesheet">
 </head>
@@ -12,7 +13,7 @@
     <content>
         <div id = "contentHolder">
             <h1>Color Palette from Image</h1>
-            <p>Drag and drop an image below to generate a palette of 16 colors!</p>
+            <p>Drag and drop an image below to generate a palette of 16 colors based on the image.</p>
             <a id = "source-link" href = "https://github.com/claby2/color-average" target = "_blank" rel="noreferrer">source code</a>
             <div id = "drop" ondrop = "dropHandler(event);" ondragover = "dragOverHandler(event);" multiple>
                 <p>DRAG AN IMAGE HERE</p>

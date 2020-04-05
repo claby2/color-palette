@@ -1,3 +1,5 @@
+new ClipboardJS('.bucket');
+
 output = document.getElementById("output");
 
 function initialSplit(img, depth) {
@@ -103,8 +105,9 @@ function displayImage(files) {
         for(let i = 0; i < 16; i++) {
             let bucket = document.createElement("div");
             bucket.classList.add("bucket");
-            console.log(rgbToHex(averages[i][0], averages[i][1], averages[i][2]));
             bucket.style.backgroundColor = rgbToHex(averages[i][0], averages[i][1], averages[i][2]);
+            bucket.setAttribute('data-clipboard-action', 'copy');
+            bucket.setAttribute('data-clipboard-text', rgbToHex(averages[i][0], averages[i][1], averages[i][2]));
             buckets.appendChild(bucket);
         }
         output.appendChild(buckets);
@@ -113,7 +116,6 @@ function displayImage(files) {
 
 function dragOverHandler(event) {
     event.preventDefault();
-    
 }
 
 function dropHandler(event) {
