@@ -81,7 +81,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
     grid-gap: 5px;
-    grid-auto-flow: dense;
+    grid-auto-flow: row dense;
     align-items: center;
     justify-content: center;
 }
@@ -90,6 +90,8 @@ h1 {
     height: 50px;
     width: 50px;
     border-radius: 50px;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: 0.1s;
 }
 
 .image {
@@ -100,6 +102,16 @@ h1 {
 
 iframe {
     margin: 20px 0 0 0;
+}
+
+.copyArrow {
+    user-select: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    font-weight: 700;
 }
 
 @media (max-width: 1000px) {

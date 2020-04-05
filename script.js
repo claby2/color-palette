@@ -90,6 +90,53 @@ function rgbToHex(r, g, b) {
     return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
 }
 
+function invertColor(r, g, b) {
+    r /= 255, g /= 255, b /= 255;
+
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+  
+    if (max == min) {
+      h = s = 0;
+    } else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+  
+      h /= 6;
+    }
+
+    h = (h + 180)%360;
+    l = l + 0.75 > 1 ? l - 0.75 : l + 0.75;
+
+    if(s == 0){
+        r = g = b = l;
+    }else{
+        var hue2rgb = function hue2rgb(p, q, t){
+            if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+
+}
+
 function displayImage(files) {
     colorBuckets = [];
     while(output.firstChild && output.removeChild(output.firstChild));
@@ -99,15 +146,34 @@ function displayImage(files) {
     output.appendChild(img);
     img.onload = function() {
         initialSplit(img, 4);
-        let averages = getAverages();
+        let nonUnique = getAverages();
         let buckets = document.createElement("div");
-        buckets.classList.add("buckets")
-        for(let i = 0; i < 16; i++) {
+        buckets.classList.add("buckets");
+
+        let averages = [...new Set(nonUnique.map(x => x.join(',')))].map(x => x.split(',').map(e => parseInt(e)));
+
+        console.log(nonUnique);
+        console.log(averages);
+
+        for(let i = 0; i < averages.length; i++) {
+            let arrow = document.createElement("p");
+            arrow.innerText = "copy";
+            arrow.classList.add("copyArrow");
+            let inverse = invertColor(averages[i][0], averages[i][1], averages[i][2]);
+            let bucketColor = rgbToHex(averages[i][0], averages[i][1], averages[i][2]);
+
             let bucket = document.createElement("div");
             bucket.classList.add("bucket");
-            bucket.style.backgroundColor = rgbToHex(averages[i][0], averages[i][1], averages[i][2]);
+            bucket.style.backgroundColor = bucketColor;
+
             bucket.setAttribute('data-clipboard-action', 'copy');
-            bucket.setAttribute('data-clipboard-text', rgbToHex(averages[i][0], averages[i][1], averages[i][2]));
+            bucket.setAttribute('data-clipboard-text', bucketColor);
+
+            bucket.addEventListener("mouseenter", ()=>{arrow.style.visibility = "visible"});
+            bucket.addEventListener("mouseleave", ()=>{arrow.style.visibility = "hidden"});
+            arrow.style.color = rgbToHex(inverse[0], inverse[1], inverse[2]);
+            bucket.appendChild(arrow);
+
             buckets.appendChild(bucket);
         }
         output.appendChild(buckets);
