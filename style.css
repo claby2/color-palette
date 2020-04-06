@@ -4,7 +4,7 @@ body {
     color: #fefbd8;
 }
 
-content {
+main {
     padding: 50px 0 50px 0;
     width: 100%;
     align-items: center;
@@ -18,7 +18,7 @@ content {
     width: 40vw;
 }
 
-content p, #source-link {
+main p, #source-link {
     text-align: left;
     width: 100%;
 }

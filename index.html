@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" content="Generate a color palette based on an image using median cut algorithm.">
     <title>Color Palette</title>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet"> 
@@ -10,8 +10,8 @@
 </head>
 <body>
 
-    <content>
-        <div id = "contentHolder">
+    <main>
+        <content id = "contentHolder">
             <h1>Color Palette from Image</h1>
             <p>Drag and drop an image below to generate a palette of colors based on the image median cut algorithm.</p>
             <a id = "source-link" href = "https://github.com/claby2/color-average" target = "_blank" rel="noreferrer">source code</a>
@@ -22,11 +22,8 @@
             <canvas id = "canvas"></canvas>
         
             <div id = "output"></div>
-        </div>
-
-    </content>
-
-
+        </content>
+    </main>
     <script src = "script.js"></script>
     
 </body>
