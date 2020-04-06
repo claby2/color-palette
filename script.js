@@ -93,6 +93,7 @@ function rgbToHex(r, g, b) {
 }
 
 function displayImage(files) {
+    resetDropStyle();
     while(output.firstChild && output.removeChild(output.firstChild));
     let img = document.createElement("img");
     img.src = URL.createObjectURL(files[0]);
@@ -131,6 +132,11 @@ function displayImage(files) {
     }
 }
 
+function resetDropStyle() {
+    drop.setAttribute('data-theme', null);
+    dropText.innerText = "DRAG AN IMAGE HERE"
+}
+
 function dragOverHandler(event) {
     drop.setAttribute('data-theme', "drag-over");
     dropText.innerText = "DROP IMAGE..."
@@ -138,8 +144,7 @@ function dragOverHandler(event) {
 }
 
 function dragLeaveHandler(event) {
-    drop.setAttribute('data-theme', null);
-    dropText.innerText = "DRAG AN IMAGE HERE"
+    resetDropStyle();
     event.preventDefault();
 }
 
