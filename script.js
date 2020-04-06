@@ -1,6 +1,8 @@
 new ClipboardJS('.bucket');
 
 output = document.getElementById("output");
+let drop = document.getElementById("drop");
+let dropText = document.getElementById("drop-text");
 
 function initialSplit(img, depth) {
     let canvas = document.getElementById("canvas");
@@ -130,6 +132,14 @@ function displayImage(files) {
 }
 
 function dragOverHandler(event) {
+    drop.setAttribute('data-theme', "drag-over");
+    dropText.innerText = "DROP IMAGE..."
+    event.preventDefault();
+}
+
+function dragLeaveHandler(event) {
+    drop.setAttribute('data-theme', null);
+    dropText.innerText = "DRAG AN IMAGE HERE"
     event.preventDefault();
 }
 
